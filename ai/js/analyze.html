@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прогнозирование с помощью TensorFlow.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Прогнозирование с помощью линейной регрессии</h1>
+    <canvas id="myChart" width="400" height="200"></canvas>
+    <script>
+        const data = [
+            { x: 1, y: 2 },
+            { x: 2, y: 3 },
+            { x: 3, y: 5 },
+            { x: 4, y: 4 },
+            { x: 5, y: 5 }
+        ];
+
+        const xs = data.map(point => point.x);
+        const ys = data.map(point => point.y);
+        const model = tf.sequential();
+        model.add(tf.layers.dense({ units: 1, inputShape: [1] }));
+        model.compile({ loss: 'meanSquaredError', optimizer: 'sgd' });
+
+        const xsTensor = tf.tensor2d(xs, [xs.length, 1]);
+        const ysTensor = tf.tensor2d(ys, [ys.length, 1]);
+
+        async function trainModel() {
+            await model.fit(xsTensor, ysTensor, { epochs: 100 });
+            predict();
+        }
+
+        function predict() {
+            const xPred = tf.tensor2d([6], [1, 1]); // Прогнозируем для x = 6
+            const prediction = model.predict(xPred);
+            prediction.print(); // Печатает предсказанное значение
+            plotData(xs, ys, 6, prediction.dataSync()[0]);
+        }
+
+        function plotData(xs, ys, xPred, yPred) {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Данные',
+                        data: xs.map((x, i) => ({ x, y: ys[i] })),
+                        backgroundColor: 'rgba(75, 192, 192, 1)'
+                    }, {
+                        label: 'Прогноз',
+                        data: [{ x: xPred, y: yPred }],
+                        backgroundColor: 'rgba(255, 99, 132, 1)'
+                    }],
+                },
+                options: {
+                    scales: {
+                        x: { title: { display: true, text: 'x' } },
+                        y: { title: { display: true, text: 'y' } }
+                    }
+                }
+            });
+        }
+
+        trainModel();
+
+    </script>
+</body>
+</html>
