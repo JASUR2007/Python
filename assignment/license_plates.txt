@@ -1,0 +1,27 @@
+[
+    {
+        "number": "01A123BC",
+        "price": 12000,
+        "status": "Available"
+    },
+    {
+        "number": "01A123BC",
+        "price": 70,
+        "status": "Available"
+    },
+    {
+        "number": "01A888CC",
+        "price": 150,
+        "status": "Available"
+    },
+    {
+        "number": "01A777DD",
+        "price": 800,
+        "status": "Available"
+    },
+    {
+        "number": "01H666PP",
+        "price": 8000,
+        "status": "Sold"
+    }
+]

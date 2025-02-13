@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "Aminjon",
+        "address": "tashkent"
+    },
+    {
+        "id": 2,
+        "name": "Agent001",
+        "address": "USA. Los Angleles"
+    },
+    {
+        "id": 3,
+        "name": "Akobir",
+        "address": "Tajikistan"
+    },
+    {
+        "id": 4,
+        "name": "Algo",
+        "address": "samarkaand"
+    }
+]

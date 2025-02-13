@@ -1,0 +1,11 @@
+[
+    {
+        "plate": "01A123BC",
+        "buyer": "Agent001"
+    },
+    {
+        "id": 2,
+        "plate": "01H666PP",
+        "buyer": "akobir"
+    }
+]
